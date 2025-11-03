@@ -14,7 +14,7 @@ const app = (0, express_1.default)();
 dotenv_1.default.config();
 app.use(express_1.default.json());
 app.use((0, cors_1.default)({
-    origin: "http://localhost:5173", // asal dari FE kamu (Vite default)
+    origin: ["http://localhost:5173", "https://be-survei-builder-ekn3.vercel.app"], // asal dari FE kamu (Vite default)
     credentials: true // biar cookie (refresh token) bisa ikut
 }));
 app.use('/', penelitiRoute_1.default);
