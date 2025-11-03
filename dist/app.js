@@ -21,6 +21,4 @@ app.use('/', penelitiRoute_1.default);
 app.use('/', surveiRoute_1.default);
 app.use('/', responseRoute_1.default);
 (0, db_1.initDB)();
-app.listen(2001, () => {
-    console.log("Server Running In PORT 2001");
-});
+exports.default = app;

@@ -78,7 +78,6 @@ const convertResponseToExcel = (req, res) => __awaiter(void 0, void 0, void 0, f
                 }),
             });
         });
-        // 🔹 Kelompokkan berdasarkan session
         const sessionGroups = {};
         formatted.forEach((r) => {
             r.answers.forEach((a) => {
@@ -91,13 +90,10 @@ const convertResponseToExcel = (req, res) => __awaiter(void 0, void 0, void 0, f
             });
         });
         const workbook = new exceljs_1.default.Workbook();
-        // 🔹 Loop setiap session → buat sheet baru
         for (const [sessionName, group] of Object.entries(sessionGroups)) {
             const { rows, allowMultiple } = group;
             const worksheet = workbook.addWorksheet(sessionName.slice(0, 31));
-            // 🔹 Ambil pertanyaan unik
             const uniqueQuestions = Array.from(new Map(rows.map((r) => [r.question_id, r.question_text])).entries());
-            // 🔹 Header kolom
             const headers = [
                 { header: "Nama Responden", key: "responden_name", width: 25 },
                 { header: "Email", key: "email", width: 25 },
