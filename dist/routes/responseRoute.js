@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const responseController_1 = require("../controllers/responseController");
+const convertExcelController_1 = require("../controllers/convertExcelController");
+const router = (0, express_1.Router)();
+router.post("/survei/input", responseController_1.createSurveyResponse);
+router.get("/survei/response/:survei_id", responseController_1.getResponsesBySurvey);
+router.post("/survei/response/convert/:survei_id", convertExcelController_1.convertResponseToExcel);
+router.get("/survei/responseById/:id", responseController_1.getResponseById);
+router.put("/survei/response/edit/:id", responseController_1.updateSurveyResponse);
+router.delete("/survei/response/delete/:id", responseController_1.deleteSurveyResponse);
+exports.default = router;
