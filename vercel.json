@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
+  "buildCommand": "npm install typescript && npm run build",
   "builds": [
     { "src": "dist/app.js", "use": "@vercel/node" }
   ],
