@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev src/app.ts",
-    "build": "tsc",
+    "vercel-build": "echo 'skip build, using prebuilt dist folder'",
     "start": "node dist/app.js"
   },
   "keywords": [],
