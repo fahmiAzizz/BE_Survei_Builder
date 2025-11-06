@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "vercel-build": "echo 'skip build, using prebuilt dist folder'",
+  "scripts": { 
+    "build": "echo 'Skipping build - dist folder already built'",
     "start": "node dist/app.js"
   },
   "keywords": [],
