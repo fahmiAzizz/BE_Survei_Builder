@@ -22,7 +22,6 @@ const surveiModel_1 = __importDefault(require("../models/surveiModel"));
 const sessionModel_1 = __importDefault(require("../models/sessionModel"));
 const questionModel_1 = __importDefault(require("../models/questionModel"));
 const questionOptionModel_1 = __importDefault(require("../models/questionOptionModel"));
-const respondenModel_1 = __importDefault(require("../models/respondenModel"));
 const responseModel_1 = __importDefault(require("../models/responseModel"));
 const answerModel_1 = __importDefault(require("../models/answerModel"));
 dotenv_1.default.config();
@@ -46,7 +45,6 @@ function initDB() {
             Session: (0, sessionModel_1.default)(sequelize),
             Question: (0, questionModel_1.default)(sequelize),
             QuestionOption: (0, questionOptionModel_1.default)(sequelize),
-            Responden: (0, respondenModel_1.default)(sequelize),
             Response: (0, responseModel_1.default)(sequelize),
             Answer: (0, answerModel_1.default)(sequelize),
         };
@@ -59,8 +57,6 @@ function initDB() {
         db.Question.belongsTo(db.Session, { foreignKey: "session_id" });
         db.Question.hasMany(db.QuestionOption, { foreignKey: "question_id" });
         db.QuestionOption.belongsTo(db.Question, { foreignKey: "question_id" });
-        db.Responden.hasMany(db.Response, { foreignKey: "responden_id" });
-        db.Response.belongsTo(db.Responden, { foreignKey: "responden_id" });
         db.Survei.hasMany(db.Response, { foreignKey: "survei_id" });
         db.Response.belongsTo(db.Survei, { foreignKey: "survei_id" });
         db.Peneliti.hasMany(db.Response, { foreignKey: "submitted_by", as: "SubmittedResponses" });

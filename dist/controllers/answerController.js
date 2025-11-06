@@ -11,23 +11,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getResponseById = exports.getResponsesBySurvey = exports.createSurveyResponse = void 0;
 const db_1 = require("../config/db");
-const respondenModel_1 = require("../models/respondenModel");
 const responseModel_1 = require("../models/responseModel");
 const answerModel_1 = require("../models/answerModel");
 const createSurveyResponse = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const db = (0, db_1.getDB)();
     const t = yield db.sequelize.transaction();
     try {
-        const { survei_id, responden, answers, submitted_by } = req.body;
-        const respondenRecord = yield respondenModel_1.Responden.create({
-            name: responden.name,
-            email: responden.email,
-            address: responden.address,
-        }, { transaction: t });
-        // 2️⃣ Simpan data response survei
+        const { survei_id, answers, submitted_by } = req.body;
         const responseRecord = yield responseModel_1.Response.create({
             survei_id,
-            responden_id: respondenRecord.id,
             submitted_by,
             submitted_at: new Date(),
         }, { transaction: t });
@@ -42,7 +34,6 @@ const createSurveyResponse = (req, res) => __awaiter(void 0, void 0, void 0, fun
         res.status(201).json({
             message: "Response survei berhasil disimpan",
             data: {
-                responden: respondenRecord,
                 response: responseRecord,
                 answers: answerRecords,
             },
@@ -55,13 +46,12 @@ const createSurveyResponse = (req, res) => __awaiter(void 0, void 0, void 0, fun
     }
 });
 exports.createSurveyResponse = createSurveyResponse;
-// 🔹 Ambil semua response untuk satu survei
 const getResponsesBySurvey = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { survei_id } = req.params;
         const responses = yield responseModel_1.Response.findAll({
             where: { survei_id },
-            include: [respondenModel_1.Responden, answerModel_1.Answer],
+            include: [answerModel_1.Answer],
         });
         res.json(responses);
     }
@@ -70,12 +60,11 @@ const getResponsesBySurvey = (req, res) => __awaiter(void 0, void 0, void 0, fun
     }
 });
 exports.getResponsesBySurvey = getResponsesBySurvey;
-// 🔹 Ambil satu response lengkap (responden + jawaban)
 const getResponseById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
         const response = yield responseModel_1.Response.findByPk(id, {
-            include: [respondenModel_1.Responden, answerModel_1.Answer],
+            include: [answerModel_1.Answer],
         });
         if (!response)
             return res.status(404).json({ message: "Response tidak ditemukan" });

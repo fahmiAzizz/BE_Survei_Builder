@@ -9,7 +9,6 @@ exports.Response = Response;
 function responseModel(sequelize) {
     Response.init({
         survei_id: { type: sequelize_1.DataTypes.INTEGER, allowNull: false },
-        responden_id: { type: sequelize_1.DataTypes.INTEGER, allowNull: false },
         submitted_by: { type: sequelize_1.DataTypes.INTEGER, allowNull: false },
         submitted_at: { type: sequelize_1.DataTypes.DATE },
     }, {

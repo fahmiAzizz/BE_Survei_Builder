@@ -33,7 +33,6 @@ const createSurvey = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                 allow_multiple: (_c = s.allow_multiple) !== null && _c !== void 0 ? _c : false,
             }, { transaction: t });
             for (const q of Array.isArray(s.questions) ? s.questions : []) {
-                // sanitize basic fields
                 const mainQPayload = {
                     session_id: session.id,
                     question_text: (_d = q.question_text) !== null && _d !== void 0 ? _d : "",
@@ -46,7 +45,6 @@ const createSurvey = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                     transaction: t,
                 });
                 console.log("Created main question:", question.id, mainQPayload);
-                // options for main question
                 if (["dropdown", "checkbox"].includes(q.type) && Array.isArray(q.options) && q.options.length) {
                     const options = q.options.map((opt) => ({
                         question_id: question.id,
