@@ -5,6 +5,5 @@
   ],
   "routes": [
     { "src": "/(.*)", "dest": "dist/app.js" }
-  ],
-  "outputDirectory": "dist"
+  ]
 }
