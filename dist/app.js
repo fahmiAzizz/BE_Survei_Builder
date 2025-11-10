@@ -20,7 +20,7 @@ app.use(
     origin: [
       "http://localhost:5173",
       "http://survey-builder.sajogyo-institute.org",
-      "https://survey-builder.sajogyo-institute.org",
+      "http://survey-builder.sajogyo-institute.org",
       "https://be-survei-builder-ekn3.vercel.app",
     ],
     credentials: true,
