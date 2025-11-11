@@ -77,7 +77,7 @@ function initDB() {
             hooks: true,
             foreignKey: "parent_question_id",
         });
-        sequelize.sync({ force: true })
+        sequelize.sync({ force: false })
             .then(() => {
             console.log('✅ Database synchronized with alter mode');
         })
